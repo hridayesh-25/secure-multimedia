@@ -5,6 +5,12 @@ import receiver_module
 import pandas as pd
 import plotly.express as px
 
+
+os.makedirs("input_files", exist_ok=True)
+os.makedirs("encrypted_files", exist_ok=True)
+os.makedirs("decrypted_files", exist_ok=True)
+os.makedirs("results", exist_ok=True)
+
 st.set_page_config(
     page_title="Secure Multimedia Cloud System",
     layout="wide"
