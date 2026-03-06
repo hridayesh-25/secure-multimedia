@@ -12,20 +12,7 @@ os.makedirs("decrypted_files", exist_ok=True)
 os.makedirs("results", exist_ok=True)
 decrypted_folder = "decrypted_files"
 
-files = os.listdir(decrypted_folder)
 
-if files:
-    latest_file = os.path.join(decrypted_folder, files[0])
-
-    with open(latest_file, "rb") as f:
-        st.download_button(
-            label="Download Decrypted File",
-            data=f,
-            file_name=files[0],
-            mime="application/octet-stream"
-        )
-else:
-    st.info("No decrypted file available yet.")
 
 
 st.set_page_config(
@@ -76,9 +63,18 @@ elif page == "Receiver":
     if st.button("Download & Decrypt from Cloud"):
 
         with st.spinner("Downloading and decrypting..."):
-            receiver_module.receiver_pipeline()
+            decrypted_file = receiver_module.receiver_pipeline()
 
         st.success("File downloaded and decrypted successfully.")
+
+        with open(decrypted_file, "rb") as f:
+            st.download_button(
+                label="Download Decrypted File",
+                data=f,
+                file_name=os.path.basename(decrypted_file),
+                mime="application/octet-stream"
+            )
+            
 
 # =====================================================
 # 📊 ANALYTICS PAGE

@@ -64,7 +64,6 @@ def decrypt_file(aes_key):
     unpadder = padding.PKCS7(128).unpadder()
     plaintext = unpadder.update(padded) + unpadder.finalize()
 
-    # restore original filename
     with open(FILENAME_FILE, "r") as f:
         filename = f.read().strip()
 
@@ -73,14 +72,15 @@ def decrypt_file(aes_key):
     with open(decrypted_path, "wb") as f:
         f.write(plaintext)
 
-    print("Decrypted file saved as:", decrypted_path)
+    return decrypted_path
 
 def receiver_pipeline():
 
     download_from_s3()
 
     private_key = load_private_key()
-
     aes_key = decrypt_aes_key(private_key)
 
-    decrypt_file(aes_key)
+    decrypted_path = decrypt_file(aes_key)
+
+    return decrypted_path
