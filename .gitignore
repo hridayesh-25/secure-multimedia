@@ -1,0 +1,36 @@
+# Ignore input multimedia files
+input_files/
+
+# Ignore encrypted outputs
+encrypted_files/
+
+# Ignore decrypted outputs
+decrypted_files/
+
+# .pem
+private_key.pem
+public_key.pem
+
+#ignore files
+decrypted_fi2mb.jpg
+progress-12thFeb.md
+
+#results
+results/
+
+# Ignore .env file containing sensitive information
+.env
+
+# private keys
+private_key.pem
+
+#public keys
+public_key.pem
+
+#pycache
+__pycache__/
+
+*.pyc
+*.bin
+*.jpg
+*.png
