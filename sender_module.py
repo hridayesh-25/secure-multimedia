@@ -6,6 +6,8 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives.asymmetric import padding as asym_padding
 from cryptography.hazmat.primitives import serialization, hashes
 from dotenv import load_dotenv
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives import serialization
 
 load_dotenv()
 
@@ -18,6 +20,31 @@ AWS_SECRET_KEY = os.getenv("AWS_SECRET_KEY")
 AWS_REGION = os.getenv("AWS_REGION")
 S3_BUCKET = os.getenv("S3_BUCKET")
 
+def generate_keys():
+    private_key = rsa.generate_private_key(
+        public_exponent=65537,
+        key_size=2048
+    )
+
+    public_key = private_key.public_key()
+
+    with open("private_key.pem", "wb") as f:
+        f.write(
+            private_key.private_bytes(
+                encoding=serialization.Encoding.PEM,
+                format=serialization.PrivateFormat.TraditionalOpenSSL,
+                encryption_algorithm=serialization.NoEncryption()
+            )
+        )
+
+    with open("public_key.pem", "wb") as f:
+        f.write(
+            public_key.public_bytes(
+                encoding=serialization.Encoding.PEM,
+                format=serialization.PublicFormat.SubjectPublicKeyInfo
+            )
+        )
+
 s3 = boto3.client(
     "s3",
     region_name=AWS_REGION,
@@ -26,6 +53,9 @@ s3 = boto3.client(
 )
 
 def load_public_key():
+    if not os.path.exists("public_key.pem"):
+        generate_keys()
+
     with open("public_key.pem", "rb") as f:
         return serialization.load_pem_public_key(f.read())
 
