@@ -6,6 +6,10 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
+os.makedirs("input_files", exist_ok=True)
+os.makedirs("encrypted_files", exist_ok=True)
+os.makedirs("decrypted_files", exist_ok=True)
+os.makedirs("results", exist_ok=True)
 decrypted_folder = "decrypted_files"
 
 files = os.listdir(decrypted_folder)
@@ -20,11 +24,9 @@ if files:
             file_name=files[0],
             mime="application/octet-stream"
         )
+else:
+    st.info("No decrypted file available yet.")
 
-os.makedirs("input_files", exist_ok=True)
-os.makedirs("encrypted_files", exist_ok=True)
-os.makedirs("decrypted_files", exist_ok=True)
-os.makedirs("results", exist_ok=True)
 
 st.set_page_config(
     page_title="Secure Multimedia Cloud System",
