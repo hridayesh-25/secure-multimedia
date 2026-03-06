@@ -4,7 +4,22 @@ import sender_module
 import receiver_module
 import pandas as pd
 import plotly.express as px
+import streamlit as st
 
+decrypted_folder = "decrypted_files"
+
+files = os.listdir(decrypted_folder)
+
+if files:
+    latest_file = os.path.join(decrypted_folder, files[0])
+
+    with open(latest_file, "rb") as f:
+        st.download_button(
+            label="Download Decrypted File",
+            data=f,
+            file_name=files[0],
+            mime="application/octet-stream"
+        )
 
 os.makedirs("input_files", exist_ok=True)
 os.makedirs("encrypted_files", exist_ok=True)
