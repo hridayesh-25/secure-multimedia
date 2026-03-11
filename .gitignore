@@ -15,8 +15,7 @@ public_key.pem
 decrypted_fi2mb.jpg
 progress-12thFeb.md
 
-#results
-results/
+
 
 # Ignore .env file containing sensitive information
 .env
