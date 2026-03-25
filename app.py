@@ -221,15 +221,26 @@ elif page == "Analytics":
 
             st.dataframe(df)
 
-            fig1 = px.line(
-                df,
-                x="File Size (bytes)",
-                y="Crypto Time",
-                color="Mode",
-                markers=True,
-                title="File Size vs Crypto Time"
-            )
-            st.plotly_chart(fig1, use_container_width=True)
+            # fig1 = px.line(
+            #     df,
+            #     x="File Size (bytes)",
+            #     y="Crypto Time",
+            #     color="Mode",
+            #     markers=True,
+            #     title="File Size vs Crypto Time"
+            # )
+            # fig1.update_layout(
+            #     font=dict(size=18),  # increase overall font
+            #     title_font=dict(size=20),
+            #     xaxis_title_font=dict(size=18),
+            #     yaxis_title_font=dict(size=18)
+            # )
+            # fig1.update_traces(
+            #     line=dict(width=3),
+            #     marker=dict(size=8)
+            # )
+            # # fig1.write_image("fig1.png", scale=3)
+            # st.plotly_chart(fig1, use_container_width=True)
 
             fig2 = px.line(
                 df,
@@ -239,6 +250,17 @@ elif page == "Analytics":
                 markers=True,
                 title="File Size vs Overhead (%)"
             )
+            # fig1.update_layout(
+            #     font=dict(size=18),  # increase overall font
+            #     title_font=dict(size=20),
+            #     xaxis_title_font=dict(size=18),
+            #     yaxis_title_font=dict(size=18)
+            # )
+            # fig1.update_traces(
+            #     line=dict(width=3),
+            #     marker=dict(size=8)
+            # )
+            # fig1.write_image("fig1.png", scale=3)
             st.plotly_chart(fig2, use_container_width=True)
 
         else:
@@ -261,6 +283,17 @@ elif page == "Analytics":
                 markers=True,
                 title="File Size vs Upload Time"
             )
+            fig1.update_layout(
+                font=dict(size=30),  # increase overall font
+                title_font=dict(size=30),
+                xaxis_title_font=dict(size=30),
+                yaxis_title_font=dict(size=30)
+            )
+            fig1.update_traces(
+                line=dict(width=5),
+                marker=dict(size=13)
+            )
+            # fig1.write_image("fig1.png", scale=3)
             st.plotly_chart(fig1, use_container_width=True)
 
             fig2 = px.line(
@@ -270,6 +303,17 @@ elif page == "Analytics":
                 markers=True,
                 title="File Size vs End-to-End Time"
             )
+            fig2.update_layout(
+                font=dict(size=18),  # increase overall font
+                title_font=dict(size=20),
+                xaxis_title_font=dict(size=18),
+                yaxis_title_font=dict(size=18)
+            )
+            fig2.update_traces(
+                line=dict(width=3),
+                marker=dict(size=8)
+            )
+            # fig2.write_image("fig2.png", scale=3)
             st.plotly_chart(fig2, use_container_width=True)
 
             fig3 = px.line(
@@ -279,6 +323,17 @@ elif page == "Analytics":
                 markers=True,
                 title="Crypto Contribution to End-to-End Time (%)"
             )
+            fig3.update_layout(
+                font=dict(size=18),  # increase overall font
+                title_font=dict(size=20),
+                xaxis_title_font=dict(size=18),
+                yaxis_title_font=dict(size=18)
+            )
+            fig3.update_traces(
+                line=dict(width=3),
+                marker=dict(size=8)
+            )
+            # fig3.write_image("fig3.png", scale=3)
             st.plotly_chart(fig3, use_container_width=True)
 
         else:
